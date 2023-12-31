@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold "Server=.\SQLEXPRESS; Database=TIMETRACK_PL; Integrated Security=True; TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer --output-dir Entities
