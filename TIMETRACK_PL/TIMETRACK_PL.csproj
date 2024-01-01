@@ -26,4 +26,8 @@
     <Folder Include="Entities\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UserInputValidation\UserInputValidation.csproj" />
+  </ItemGroup>
+
 </Project>

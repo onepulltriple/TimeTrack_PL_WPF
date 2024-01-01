@@ -96,13 +96,24 @@ namespace TIMETRACK_PL
         {
             for (int i = 0; i < ListOfProjects.Count(); i++)
             {
+                Project tempProject = ListOfProjects[i];
                 Button newButton = new();
                 newButton.Content = ListOfProjects[i].Name;
                 newButton.Name = "ProjectButton" + i.ToString("D" + 2);
                 newButton.Height = 60;
                 newButton.Width = 80;
+                newButton.Click += (object sender, RoutedEventArgs e) => 
+                    { ProjectButtonClicked(sender, e, tempProject); };
                 WP01.Children.Add(newButton);
             }
+        }
+
+        private void ProjectButtonClicked(object sender, RoutedEventArgs e, Project project)
+        {
+            // open up a new CRUD window and hand over the project
+            ManageTasksWindow MTW = new(project);
+            MTW.Show();
+            this.Close();
         }
 
         private void LoadAllProjects()
@@ -146,9 +157,5 @@ namespace TIMETRACK_PL
             Environment.Exit(0);
         }
 
-        private void ProjectButtonClicked(object sender, RoutedEventArgs e)
-        {
-            // open up a new CRUD window and hand over the project
-        }
     }
 }
