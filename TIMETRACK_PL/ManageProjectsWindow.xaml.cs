@@ -64,28 +64,6 @@ namespace TIMETRACK_PL
             }
         }
 
-        private string _enteredStartTime;
-        public string EnteredStartTime
-        {
-            get { return _enteredStartTime; }
-            set
-            {
-                _enteredStartTime = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EnteredStartTime)));
-            }
-        }
-
-        private string _enteredEndTime;
-        public string EnteredEndTime
-        {
-            get { return _enteredEndTime; }
-            set
-            {
-                _enteredEndTime = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EnteredEndTime)));
-            }
-        }
-
         private List<Entities.Task> _listOfTasks;
         public List<Entities.Task> ListOfTasks
         {
@@ -109,6 +87,7 @@ namespace TIMETRACK_PL
         }
 
         #endregion
+
         public ManageProjectsWindow()
         {
             InitializeComponent();

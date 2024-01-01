@@ -22,10 +22,13 @@
         </Grid.ColumnDefinitions>
         
         <!--headline-->
-        <Label        Grid.Row="0" Grid.Column="0" Margin="6" VerticalAlignment="Center" FontSize="20" Grid.ColumnSpan="2">
-            TimeTrack_PL
+        <Label       Grid.Row="0" Grid.Column="0" Margin="6" VerticalAlignment="Center" FontSize="20" Grid.ColumnSpan="2">
+            TimeTrack PL
         </Label>
 
+        <!--middle section-->
+        <WrapPanel   Grid.Row="1" Grid.Column="0" Margin="6" Grid.ColumnSpan="2" 
+                     x:Name="WP01" Orientation="Vertical"/>
 
         <!--lower section-->
         <Button      Grid.Row="2" Grid.Column="0" Name="MEVEButton" Click="MPRJButtonClicked" Content="Manage Projects"/>
