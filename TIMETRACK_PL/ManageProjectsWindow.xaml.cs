@@ -23,7 +23,7 @@ namespace TIMETRACK_PL
     /// <summary>
     /// Interaction logic for ManageProjects.xaml
     /// </summary>
-    public partial class ManageProjects : Window, INotifyPropertyChanged
+    public partial class ManageProjectsWindow : Window, INotifyPropertyChanged
     {
         #region Class Members
 
@@ -109,7 +109,7 @@ namespace TIMETRACK_PL
         }
 
         #endregion
-        public ManageProjects()
+        public ManageProjectsWindow()
         {
             InitializeComponent();
             DataContext = this;

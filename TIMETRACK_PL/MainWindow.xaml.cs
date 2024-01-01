@@ -24,7 +24,7 @@ namespace TIMETRACK_PL
 
         private void MPRJButtonClicked(object sender, RoutedEventArgs e)
         {
-            ManageProjects MPW = new();
+            ManageProjectsWindow MPW = new();
             MPW.Show();
             this.Close();
         }
