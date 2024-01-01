@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TIMETRACK_PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Background="AliceBlue">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!--headline-->
+        <Label        Grid.Row="0" Grid.Column="0" Margin="6" VerticalAlignment="Center" FontSize="20" Grid.ColumnSpan="2">
+            TimeTrack_PL
+        </Label>
+
+
+        <!--lower section-->
+        <Button      Grid.Row="2" Grid.Column="0" Name="MEVEButton" Click="MPRJButtonClicked" Content="Manage Projects"/>
+        <!--<Button      Grid.Row="3" Grid.Column="0" Name="MARTButton" Click="MARTButtonClicked" Content="Manage Artists"/>
+        <Button      Grid.Row="2" Grid.Column="1" Name="MPERButton" Click="MPERButtonClicked" Content="Manage Performances"/>
+        <Button      Grid.Row="3" Grid.Column="1" Name="MAPPButton" Click="MAPPButtonClicked" Content="Manage Appearances"/>
+        <Button      Grid.Row="2" Grid.Column="2" Name="MTKHButton" Click="MTKHButtonClicked" Content="Manage Ticketholders"/>
+        <Button      Grid.Row="3" Grid.Column="2" Name="MTIXButton" Click="MTIXButtonClicked" Content="Manage Tickets"/>
+        <Button      Grid.Row="2" Grid.Column="3" Name="CREPButton" Click="CREPButtonClicked" Content="Create Report"/>-->
+        <Button      Grid.Row="3" Grid.Column="3" Name="EXITButton" Click="EXITButtonClicked" Content="Exit"/>
 
     </Grid>
 </Window>

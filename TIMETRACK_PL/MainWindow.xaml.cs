@@ -19,6 +19,19 @@ namespace TIMETRACK_PL
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+
+        private void MPRJButtonClicked(object sender, RoutedEventArgs e)
+        {
+            ManageProjects MPW = new();
+            MPW.Show();
+            this.Close();
+        }
+
+        private void EXITButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
