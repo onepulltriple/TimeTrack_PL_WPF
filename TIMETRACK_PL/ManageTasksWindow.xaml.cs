@@ -153,17 +153,11 @@ namespace TIMETRACK_PL
                 );
 
             ResetButtons01();
+            ResetButtons02();
 
             CloseUserInputFields01();
+            CloseUserInputFields02();
         }
-
-        //private void LoadAllProjects()
-        //{
-        //    ListOfProjects = new(_context.Projects
-        //        .OrderBy(project => project.Number)
-        //        .ToArray()
-        //        );
-        //}
 
         private void LoadAllIntervals()
         {
@@ -171,6 +165,9 @@ namespace TIMETRACK_PL
                 .OrderBy(interval => interval.StartTimeActual)
                 .ToArray()
                 );
+            ResetButtons02();
+
+            CloseUserInputFields02();
         }
 
         private void CloseUserInputFields01()
@@ -180,7 +177,7 @@ namespace TIMETRACK_PL
             UI0103.IsEnabled = false;
             UI0104.IsEnabled = false;
 
-            GRID01.IsEnabled = false;
+            //GRID01.IsEnabled = false;
         }
 
         private void CloseUserInputFields02()
@@ -204,7 +201,7 @@ namespace TIMETRACK_PL
             UI0103.IsEnabled = true;
             UI0104.IsEnabled = true;
 
-            GRID01.IsEnabled = true;
+            //GRID01.IsEnabled = true;
             DG02.IsEnabled = true;
         }
 
@@ -287,6 +284,9 @@ namespace TIMETRACK_PL
         private void DG01SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ButtonsInManageMode01();
+            CloseUserInputFields02();
+            LoadAllIntervals();
+            //ResetButtons02();
         }
 
         private void DG02SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -364,7 +364,10 @@ namespace TIMETRACK_PL
         {
             ButtonsInEditMode01();
 
+            OpenUserInputFields01();
+
             TempTask = new();
+            TempTask.ProjectId = SelectedProject.Id;
         }
 
         private void EDITButton01Clicked(object sender, RoutedEventArgs e)
@@ -702,6 +705,7 @@ namespace TIMETRACK_PL
         private Entities.Task TransferTaskProperties(Entities.Task toFill, Entities.Task origin)
         {
             toFill.Id = origin.Id;
+            toFill.Name = origin.Name;
             toFill.Description = origin.Description;
             toFill.ProjectId = origin.ProjectId;
 

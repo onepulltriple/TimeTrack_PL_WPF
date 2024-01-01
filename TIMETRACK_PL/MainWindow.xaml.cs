@@ -100,8 +100,8 @@ namespace TIMETRACK_PL
                 Button newButton = new();
                 newButton.Content = ListOfProjects[i].Name;
                 newButton.Name = "ProjectButton" + i.ToString("D" + 2);
-                newButton.Height = 60;
-                newButton.Width = 80;
+                newButton.Height = 80;
+                newButton.Width = 100;
                 newButton.Click += (object sender, RoutedEventArgs e) => 
                     { ProjectButtonClicked(sender, e, tempProject); };
                 WP01.Children.Add(newButton);
