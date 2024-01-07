@@ -165,6 +165,7 @@ namespace TIMETRACK_PL
 
         #endregion
 
+        //////////////////////////////////////////////////////////////////
         public ManageTasksWindow(Project HandedOverProject)
         {
             InitializeComponent();
@@ -173,7 +174,7 @@ namespace TIMETRACK_PL
             SelectedProject = HandedOverProject;
 
             LoadAllProjectTasks();
-            LoadAllIntervalsAndTasksPerProjects(HandedOverProject);
+            LoadAllIntervalsAndTasksPerProjects();
             //LoadAllIntervals();
         }
 
@@ -187,10 +188,10 @@ namespace TIMETRACK_PL
                 );
 
             ResetButtons01();
-            ResetButtons02();
+            //ResetButtons02();
 
             CloseUserInputFields01();
-            CloseUserInputFields02();
+            //CloseUserInputFields02();
         }
 
         private void LoadAllIntervals()
@@ -199,59 +200,81 @@ namespace TIMETRACK_PL
                 .OrderBy(interval => interval.StartTimeActual)
                 .ToArray()
                 );
-            ResetButtons02();
+            //ResetButtons02();
 
-            CloseUserInputFields02();
+            //CloseUserInputFields02();
         }
 
         #region Old stuff
         private void CloseUserInputFields01()
         {
-            UI0101.IsEnabled = false;
-            UI0102.IsEnabled = false;
-            UI0103.IsEnabled = false;
-            UI0104.IsEnabled = false;
+            //UI0101.IsEnabled = false;
+            //UI0102.IsEnabled = false;
+            //UI0103.IsEnabled = false;
+            //UI0104.IsEnabled = false;
 
-            //GRID01.IsEnabled = false;
+            UI01.IsEnabled = false;
+            UI02.IsEnabled = false;
+            UI03.IsEnabled = false;
+            UI04.IsEnabled = false;
+            UI05.IsEnabled = false;
+            DP01.IsEnabled = false;
+            UI07.IsEnabled = false;
+            CB01.IsEnabled = false;
+            UI09.IsEnabled = false;
+            UI10.IsEnabled = false;
+            UI11.IsEnabled = false;
+            UI12.IsEnabled = false;
         }
 
-        private void CloseUserInputFields02()
-        {
-            UI0201.IsEnabled = false;
-            CB0201.IsEnabled = false;
-            UI0203.IsEnabled = false;
-            DP0201.IsEnabled = false;
-            UI0205.IsEnabled = false;
-            UI0206.IsEnabled = false;
-            UI0207.IsEnabled = false;
-            UI0208.IsEnabled = false;
+        //private void CloseUserInputFields02()
+        //{
+        //    UI0201.IsEnabled = false;
+        //    CB0201.IsEnabled = false;
+        //    UI0203.IsEnabled = false;
+        //    DP0201.IsEnabled = false;
+        //    UI0205.IsEnabled = false;
+        //    UI0206.IsEnabled = false;
+        //    UI0207.IsEnabled = false;
+        //    UI0208.IsEnabled = false;
 
-            //GRID01.IsEnabled = false;
-        }
+        //    //GRID01.IsEnabled = false;
+        //}
 
         private void OpenUserInputFields01()
         {
-            UI0101.IsEnabled = true;
-            UI0102.IsEnabled = true;
-            UI0103.IsEnabled = true;
-            UI0104.IsEnabled = true;
-
-            //GRID01.IsEnabled = true;
-            DG02.IsEnabled = true;
-        }
-
-        private void OpenUserInputFields02()
-        {
-            UI0203.IsEnabled = true;
-            DP0201.IsEnabled = true;
-            UI0205.IsEnabled = true;
-            UI0206.IsEnabled = true;
-            UI0207.IsEnabled = true;
-            UI0208.IsEnabled = true;
-
+            //UI0101.IsEnabled = true;
+            //UI0102.IsEnabled = true;
+            //UI0103.IsEnabled = true;
+            //UI0104.IsEnabled = true;
+            UI01.IsEnabled = true;
+            UI02.IsEnabled = true;
+            UI03.IsEnabled = true;
+            UI04.IsEnabled = true;
+            UI05.IsEnabled = true;
+            DP01.IsEnabled = true;
+            UI07.IsEnabled = true;
+            CB01.IsEnabled = true;
+            UI09.IsEnabled = true;
+            UI10.IsEnabled = true;
+            UI11.IsEnabled = true;
+            UI12.IsEnabled = true;
             //GRID01.IsEnabled = true;
             //DG02.IsEnabled = true;
         }
+
+        //private void OpenUserInputFields02()
+        //{
+        //    UI0203.IsEnabled = true;
+        //    DP0201.IsEnabled = true;
+        //    UI0205.IsEnabled = true;
+        //    UI0206.IsEnabled = true;
+        //    UI0207.IsEnabled = true;
+        //    UI0208.IsEnabled = true;
+
+        //    //GRID01.IsEnabled = true;
+        //    //DG02.IsEnabled = true;
+        //}
 
         private void ResetButtons01()
         {
@@ -267,19 +290,19 @@ namespace TIMETRACK_PL
             DELEButton01.IsEnabled = false;
         }
 
-        private void ResetButtons02()
-        {
-            DG02.UnselectAll();
-            DG02.IsEnabled = true;
+        //private void ResetButtons02()
+        //{
+        //    DG02.UnselectAll();
+        //    DG02.IsEnabled = true;
 
-            BACKButton02.Visibility = Visibility.Visible;
-            CANCButton02.Visibility = Visibility.Hidden;
+        //    BACKButton02.Visibility = Visibility.Visible;
+        //    CANCButton02.Visibility = Visibility.Hidden;
                        
-            CREAButton02.IsEnabled = true;
-            EDITButton02.IsEnabled = false;
-            SAVEButton02.IsEnabled = false;
-            DELEButton02.IsEnabled = false;
-        }
+        //    CREAButton02.IsEnabled = true;
+        //    EDITButton02.IsEnabled = false;
+        //    SAVEButton02.IsEnabled = false;
+        //    DELEButton02.IsEnabled = false;
+        //}
 
         private void CancelButton01Clicked(object sender, RoutedEventArgs e)
         {
@@ -293,18 +316,18 @@ namespace TIMETRACK_PL
 
             CRUDWindowWPF.ReturnToMainWindowAndClose(this);
         }
-        private void CancelButton02Clicked(object sender, RoutedEventArgs e)
-        {
-            if (SAVEButton02.IsEnabled ||
-                EDITButton02.IsEnabled && DELEButton02.IsEnabled)
-            {
-                ResetButtons02();
-                CloseUserInputFields02();
-                return;
-            }
+        //private void CancelButton02Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (SAVEButton02.IsEnabled ||
+        //        EDITButton02.IsEnabled && DELEButton02.IsEnabled)
+        //    {
+        //        ResetButtons02();
+        //        CloseUserInputFields02();
+        //        return;
+        //    }
 
-            CRUDWindowWPF.ReturnToMainWindowAndClose(this);
-        }
+        //    CRUDWindowWPF.ReturnToMainWindowAndClose(this);
+        //}
 
         private void BackButton01Clicked(object sender, RoutedEventArgs e)
         {
@@ -319,24 +342,24 @@ namespace TIMETRACK_PL
         private void DG01SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ButtonsInManageMode01();
-            CloseUserInputFields02();
-            LoadAllIntervals();
+            //CloseUserInputFields02();
+            //LoadAllIntervals();
             //ResetButtons02();
         }
 
-        private void DG02SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ButtonsInManageMode02();
-        }
+        //private void DG02SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    ButtonsInManageMode02();
+        //}
 
-        private void CB0201SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CB01SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // when the selected item is switched to null, do nothing further
-            if (CB0201.SelectedItem == null)
+            if (CB01.SelectedItem == null)
                 return;
 
             // open remaining user input fields, since a task has been selected
-            OpenUserInputFields02();
+            //OpenUserInputFields02();
 
             //// fill in user input fields based on the selected interval
             //DP0201.SelectedDate = SelectedInterval.StartTimeActual;
@@ -358,16 +381,16 @@ namespace TIMETRACK_PL
             DELEButton01.IsEnabled = true;
         }
 
-        private void ButtonsInManageMode02()
-        {
-            BACKButton02.Visibility = Visibility.Hidden;
-            CANCButton02.Visibility = Visibility.Visible;
+        //private void ButtonsInManageMode02()
+        //{
+        //    BACKButton02.Visibility = Visibility.Hidden;
+        //    CANCButton02.Visibility = Visibility.Visible;
                        
-            CREAButton02.IsEnabled = false;
-            EDITButton02.IsEnabled = true;
-            SAVEButton02.IsEnabled = false;
-            DELEButton02.IsEnabled = true;
-        }
+        //    CREAButton02.IsEnabled = false;
+        //    EDITButton02.IsEnabled = true;
+        //    SAVEButton02.IsEnabled = false;
+        //    DELEButton02.IsEnabled = true;
+        //}
 
         private void ButtonsInEditMode01()
         {
@@ -382,223 +405,223 @@ namespace TIMETRACK_PL
             DG01.IsEnabled = false;
         }
 
-        private void ButtonsInEditMode02()
-        {
-            BACKButton02.Visibility = Visibility.Hidden;
-            CANCButton02.Visibility = Visibility.Visible;
+        //private void ButtonsInEditMode02()
+        //{
+        //    BACKButton02.Visibility = Visibility.Hidden;
+        //    CANCButton02.Visibility = Visibility.Visible;
                        
-            CREAButton02.IsEnabled = false;
-            EDITButton02.IsEnabled = false;
-            SAVEButton02.IsEnabled = true;
-            DELEButton02.IsEnabled = false;
+        //    CREAButton02.IsEnabled = false;
+        //    EDITButton02.IsEnabled = false;
+        //    SAVEButton02.IsEnabled = true;
+        //    DELEButton02.IsEnabled = false;
 
-            DG02.IsEnabled = false;
-        }
+        //    DG02.IsEnabled = false;
+        //}
 
-        private void CREAButton01Clicked(object sender, RoutedEventArgs e)
-        {
-            ButtonsInEditMode01();
+        //private void CREAButton01Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    ButtonsInEditMode01();
 
-            OpenUserInputFields01();
+        //    OpenUserInputFields01();
 
-            TempTask = new();
-            TempTask.ProjectId = SelectedProject.Id;
-        }
+        //    TempTask = new();
+        //    TempTask.ProjectId = SelectedProject.Id;
+        //}
 
-        private void EDITButton01Clicked(object sender, RoutedEventArgs e)
-        {
-            if (SelectedTask == null)
-            {
-                MessageBox.Show("Please select a task.");
-                return;
-            }
+        //private void EDITButton01Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (SelectedTask == null)
+        //    {
+        //        MessageBox.Show("Please select a task.");
+        //        return;
+        //    }
 
-            ButtonsInEditMode01();
+        //    ButtonsInEditMode01();
 
-            OpenUserInputFields01();
+        //    OpenUserInputFields01();
 
-            TempTask = TransferTaskProperties(new Entities.Task(), SelectedTask);
-        }
+        //    TempTask = TransferTaskProperties(new Entities.Task(), SelectedTask);
+        //}
 
-        private void SAVEButton01Clicked(object sender, RoutedEventArgs e)
-        {
-            bool ChecksWerePassed = PerformChecksOnUserInput01();
+        //private void SAVEButton01Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    bool ChecksWerePassed = PerformChecksOnUserInput01();
 
-            // when editing an existing task
-            if (ChecksWerePassed && SelectedTask != null)
-            {
-                SelectedTask = TransferTaskProperties(SelectedTask, TempTask);
-                _context.Update(SelectedTask);
-                _context.SaveChanges();
-                LoadAllProjectTasks();
-                return;
-            }
+        //    // when editing an existing task
+        //    if (ChecksWerePassed && SelectedTask != null)
+        //    {
+        //        SelectedTask = TransferTaskProperties(SelectedTask, TempTask);
+        //        _context.Update(SelectedTask);
+        //        _context.SaveChanges();
+        //        LoadAllProjectTasks();
+        //        return;
+        //    }
 
-            // when editing a new task
-            if (ChecksWerePassed)
-            {
-                _context.Add(TempTask);
-                _context.SaveChanges();
-                LoadAllProjectTasks();
-                return;
-            }
-        }
+        //    // when editing a new task
+        //    if (ChecksWerePassed)
+        //    {
+        //        _context.Add(TempTask);
+        //        _context.SaveChanges();
+        //        LoadAllProjectTasks();
+        //        return;
+        //    }
+        //}
 
-        private void DELEButton01Clicked(object sender, RoutedEventArgs e)
-        {
-            if (SelectedTask == null)
-            {
-                MessageBox.Show("Please select a task.");
-                return;
-            }
+        //private void DELEButton01Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (SelectedTask == null)
+        //    {
+        //        MessageBox.Show("Please select a task.");
+        //        return;
+        //    }
 
-            MessageBoxResult answer01 = MessageBoxResult.No;
-            MessageBoxResult answer02 = MessageBoxResult.No;
+        //    MessageBoxResult answer01 = MessageBoxResult.No;
+        //    MessageBoxResult answer02 = MessageBoxResult.No;
 
-            answer01 = MessageBox.Show(
-                "Are you sure you want to delete the selected task?",
-                "Confirm task deletion.",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
+        //    answer01 = MessageBox.Show(
+        //        "Are you sure you want to delete the selected task?",
+        //        "Confirm task deletion.",
+        //        MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if (answer01 == MessageBoxResult.Yes)
-            {
-                // check if the Task contains appearances
-                List<Interval> IntervalsLoggedForTask = new(
-                    SelectedTask.Intervals.ToArray()
-                    );
+        //    if (answer01 == MessageBoxResult.Yes)
+        //    {
+        //        // check if the Task contains appearances
+        //        List<Interval> IntervalsLoggedForTask = new(
+        //            SelectedTask.Intervals.ToArray()
+        //            );
 
-                // if the Task contains appearances
-                if (!IntervalsLoggedForTask.IsNullOrEmpty())
-                {
-                    int countOfIntervals = IntervalsLoggedForTask.Count();
+        //        // if the Task contains appearances
+        //        if (!IntervalsLoggedForTask.IsNullOrEmpty())
+        //        {
+        //            int countOfIntervals = IntervalsLoggedForTask.Count();
 
-                    string messageToUser =
-                        $"The selected task has\n" +
-                        $"{countOfIntervals} intervals logged.\n" +
-                        $"Deleting this task will delete all of its logged intervals.\n" +
-                        $"Are you sure you want to delete the selected task?";
+        //            string messageToUser =
+        //                $"The selected task has\n" +
+        //                $"{countOfIntervals} intervals logged.\n" +
+        //                $"Deleting this task will delete all of its logged intervals.\n" +
+        //                $"Are you sure you want to delete the selected task?";
 
-                    // ask follow up question
-                    answer02 = MessageBox.Show(messageToUser,
-                        "If you do this, you will get what you deserve.",
-                        MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
-                }
-                else
-                {
-                    // task is empty and can be deleted without follow up questions asked
-                    answer02 = MessageBoxResult.Yes;
-                }
+        //            // ask follow up question
+        //            answer02 = MessageBox.Show(messageToUser,
+        //                "If you do this, you will get what you deserve.",
+        //                MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+        //        }
+        //        else
+        //        {
+        //            // task is empty and can be deleted without follow up questions asked
+        //            answer02 = MessageBoxResult.Yes;
+        //        }
 
-                if (answer01 == MessageBoxResult.Yes &&
-                    answer02 == MessageBoxResult.Yes)
-                {
-                    // proceed with task deletion (cascading delete in SQL is used)
-                    _context.Remove(SelectedTask);
-                    _context.SaveChanges();
-                    LoadAllProjectTasks();
-                }
-            }
+        //        if (answer01 == MessageBoxResult.Yes &&
+        //            answer02 == MessageBoxResult.Yes)
+        //        {
+        //            // proceed with task deletion (cascading delete in SQL is used)
+        //            _context.Remove(SelectedTask);
+        //            _context.SaveChanges();
+        //            LoadAllProjectTasks();
+        //        }
+        //    }
 
-            ResetButtons01();
-        }
+        //    ResetButtons01();
+        //}
 
-        private void CREAButton02Clicked(object sender, RoutedEventArgs e)
-        {
-            ButtonsInEditMode02();
+        //private void CREAButton02Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    ButtonsInEditMode02();
 
-            // open combo box only to select an event first
-            CB0201.SelectedItem = null;
-            UI0201.IsEnabled = true;
-            CB0201.IsEnabled = true;
+        //    // open combo box only to select an event first
+        //    CB01.SelectedItem = null;
+        //    UI01.IsEnabled = true;
+        //    CB01.IsEnabled = true;
 
-            TempInterval = new();
+        //    TempInterval = new();
 
-            // clear user inputs fields which are not bound to the temp interval
-            DP0201.SelectedDate = DateTime.Now;
-            EnteredStartTime = null;
-            EnteredEndTime = null;
-        }
+        //    // clear user inputs fields which are not bound to the temp interval
+        //    DP01.SelectedDate = DateTime.Now;
+        //    EnteredStartTime = null;
+        //    EnteredEndTime = null;
+        //}
 
-        private void EDITButton02Clicked(object sender, RoutedEventArgs e)
-        {
-            if (SelectedInterval == null)
-            {
-                MessageBox.Show("Please select an interval.");
-                return;
-            }
+        //private void EDITButton02Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (SelectedInterval == null)
+        //    {
+        //        MessageBox.Show("Please select an interval.");
+        //        return;
+        //    }
 
-            ButtonsInEditMode02();
-            UI0201.IsEnabled = true;
-            CB0201.IsEnabled = true;
-            OpenUserInputFields02();
+        //    //ButtonsInEditMode02();
+        //    UI01.IsEnabled = true;
+        //    CB01.IsEnabled = true;
+        //    //OpenUserInputFields02();
 
-            TempInterval = TransferIntervalProperties(new Interval(), SelectedInterval);
+        //    TempInterval = TransferIntervalProperties(new Interval(), SelectedInterval);
 
-            // fill out user inputs fields which are not bound to the temp interval
-            DP0201.SelectedDate = TempInterval.StartTimeActual;
-            EnteredStartTime = TempInterval.StartTimeActual.ToString("HH:mm");
-            if (SelectedInterval.EndTimeActual != null)
-            {
-                EnteredEndTime = TempInterval.EndTimeActual?.ToString("HH:mm");
-            }
-            CB0201.SelectedItem = TempInterval.Task;
-        }
+        //    // fill out user inputs fields which are not bound to the temp interval
+        //    DP01.SelectedDate = TempInterval.StartTimeActual;
+        //    EnteredStartTime = TempInterval.StartTimeActual.ToString("HH:mm");
+        //    if (SelectedInterval.EndTimeActual != null)
+        //    {
+        //        EnteredEndTime = TempInterval.EndTimeActual?.ToString("HH:mm");
+        //    }
+        //    CB01.SelectedItem = TempInterval.Task;
+        //}
 
-        private void SAVEButton02Clicked(object sender, RoutedEventArgs e)
-        {
-            bool ChecksWerePassed = PerformChecksOnUserInput02();
+        //private void SAVEButton02Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    bool ChecksWerePassed = PerformChecksOnUserInput02();
 
-            // if checks were passed, transfer properties of CB0201 to the temp interval
-            if (ChecksWerePassed)
-            {
-                TempInterval.TaskId = SelectedTask.Id;
-            }
+        //    // if checks were passed, transfer properties of CB0201 to the temp interval
+        //    if (ChecksWerePassed)
+        //    {
+        //        TempInterval.TaskId = SelectedTask.Id;
+        //    }
 
-            // when editing an existing interval
-            if (ChecksWerePassed && SelectedInterval != null)
-            {
-                SelectedInterval = TransferIntervalProperties(SelectedInterval, TempInterval);
-                _context.Update(SelectedInterval);
-                _context.SaveChanges();
-                LoadAllIntervals();
-                return;
-            }
+        //    // when editing an existing interval
+        //    if (ChecksWerePassed && SelectedInterval != null)
+        //    {
+        //        SelectedInterval = TransferIntervalProperties(SelectedInterval, TempInterval);
+        //        _context.Update(SelectedInterval);
+        //        _context.SaveChanges();
+        //        LoadAllIntervals();
+        //        return;
+        //    }
 
-            // when editing a new interval
-            if (ChecksWerePassed)
-            {
-                _context.Add(TempInterval);
-                _context.SaveChanges();
-                LoadAllIntervals();
-                return;
-            }
-        }
+        //    // when editing a new interval
+        //    if (ChecksWerePassed)
+        //    {
+        //        _context.Add(TempInterval);
+        //        _context.SaveChanges();
+        //        LoadAllIntervals();
+        //        return;
+        //    }
+        //}
 
-        private void DELEButton02Clicked(object sender, RoutedEventArgs e)
-        {
-            if (SelectedInterval == null)
-            {
-                MessageBox.Show("Please select an interval.");
-                return;
-            }
+        //private void DELEButton02Clicked(object sender, RoutedEventArgs e)
+        //{
+        //    if (SelectedInterval == null)
+        //    {
+        //        MessageBox.Show("Please select an interval.");
+        //        return;
+        //    }
 
-            MessageBoxResult answer01 = MessageBoxResult.No;
+        //    MessageBoxResult answer01 = MessageBoxResult.No;
 
-            answer01 = MessageBox.Show(
-                "Are you sure you want to delete the selected interval?",
-                "Confirm interval deletion.",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
+        //    answer01 = MessageBox.Show(
+        //        "Are you sure you want to delete the selected interval?",
+        //        "Confirm interval deletion.",
+        //        MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            if (answer01 == MessageBoxResult.Yes)
-            {
-                // proceed with interval deletion
-                _context.Remove(SelectedInterval);
-                _context.SaveChanges();
-                LoadAllIntervals();
-            }
+        //    if (answer01 == MessageBoxResult.Yes)
+        //    {
+        //        // proceed with interval deletion
+        //        _context.Remove(SelectedInterval);
+        //        _context.SaveChanges();
+        //        LoadAllIntervals();
+        //    }
 
-            ResetButtons02();
-        }
+        //    //ResetButtons02();
+        //}
 
         private bool PerformChecksOnUserInput01()
         {
@@ -616,8 +639,8 @@ namespace TIMETRACK_PL
         private bool PerformChecksOnUserInput02()
         {
             // block if a required field is empty
-            if (CB0201.SelectedItem == null ||
-                DP0201.SelectedDate == null ||
+            if (CB01.SelectedItem == null ||
+                DP01.SelectedDate == null ||
                 EnteredStartTime == null )
             {
                 MessageBox.Show("Please fill out a start date and start time and ensure a task is selected.");
@@ -635,9 +658,9 @@ namespace TIMETRACK_PL
 
             // assemble StartTime
             TempInterval.StartTimeActual = new DateTime(
-                DP0201.SelectedDate.Value.Year,
-                DP0201.SelectedDate.Value.Month,
-                DP0201.SelectedDate.Value.Day,
+                DP01.SelectedDate.Value.Year,
+                DP01.SelectedDate.Value.Month,
+                DP01.SelectedDate.Value.Day,
                 useableStartTime.Hour,
                 useableStartTime.Minute,
                 useableStartTime.Second
@@ -681,9 +704,9 @@ namespace TIMETRACK_PL
 
                 // assemble EndTime
                 TempInterval.EndTimeActual = new DateTime(
-                    DP0201.SelectedDate.Value.Year,
-                    DP0201.SelectedDate.Value.Month,
-                    DP0201.SelectedDate.Value.Day,
+                    DP01.SelectedDate.Value.Year,
+                    DP01.SelectedDate.Value.Month,
+                    DP01.SelectedDate.Value.Day,
                     useableEndTime.Hour,
                     useableEndTime.Minute,
                     useableEndTime.Second
@@ -763,16 +786,150 @@ namespace TIMETRACK_PL
 
         #region New Stuff
 
-        private void LoadAllIntervalsAndTasksPerProjects(Project HandedOverProject)
+        private void LoadAllIntervalsAndTasksPerProjects()
         {
             ListOfIntervalsAndTasksPerProjects = new(_context.IntervalsAndTasksPerProjects
-                .Where(intervalsandtasksperproject => intervalsandtasksperproject.ProjectId == HandedOverProject.Id)
+                .Where(intervalsandtasksperproject => intervalsandtasksperproject.ProjectId == SelectedProject.Id)
                 .OrderBy(intervalsandtasksperproject => intervalsandtasksperproject.ActualStartTime)
                 .ToArray()
                 );
             //ResetButtons02();
 
             //CloseUserInputFields02();
+        }
+
+        private void CREAButton01Clicked(object sender, RoutedEventArgs e)
+        {
+            ButtonsInEditMode01();
+
+            OpenUserInputFields01();
+
+            TempIntervalsAndTasksPerProject = new();
+            TempIntervalsAndTasksPerProject.ProjectId = SelectedProject.Id;
+
+            //// open combo box 
+            //CB01.SelectedItem = null;
+            //UI01.IsEnabled = true;
+            //CB01.IsEnabled = true;
+
+            // clear user inputs fields which are not bound to the temp interval
+            EnteredStartTime = null;
+            EnteredEndTime = null;
+            DP01.SelectedDate = DateTime.Now;
+        }
+
+        private void EDITButton01Clicked(object sender, RoutedEventArgs e)
+        {
+            if (SelectedIntervalsAndTasksPerProject == null)
+            {
+                MessageBox.Show("Please select an interval to edit.");
+                return;
+            }
+
+            ButtonsInEditMode01();
+
+            OpenUserInputFields01();
+            //UI01.IsEnabled = true;
+            //CB01.IsEnabled = true;
+
+            TempIntervalsAndTasksPerProject = TransferIntervalsAndTasksPerProjectProperties(new IntervalsAndTasksPerProject(), SelectedIntervalsAndTasksPerProject);
+
+            // fill out user inputs fields which are not bound to the temp interval
+            //DP01.SelectedDate = TempInterval.StartTimeActual;
+            //EnteredStartTime = TempInterval.StartTimeActual.ToString("HH:mm");
+            //if (SelectedInterval.EndTimeActual != null)
+            //{
+            //    EnteredEndTime = TempInterval.EndTimeActual?.ToString("HH:mm");
+            //}
+            //CB01.SelectedItem = TempInterval.Task;
+        }
+
+        private void SAVEButton01Clicked(object sender, RoutedEventArgs e)
+        {
+            bool ChecksWerePassed = PerformChecksOnUserInput01();
+
+            // when editing an existing interval
+            if (ChecksWerePassed && SelectedTask != null)
+            {
+                SelectedIntervalsAndTasksPerProject = TransferIntervalsAndTasksPerProjectProperties(SelectedIntervalsAndTasksPerProject, TempIntervalsAndTasksPerProject);
+                _context.Update(SelectedTask);
+                _context.SaveChanges();
+                LoadAllIntervalsAndTasksPerProjects();
+                return;
+            }
+
+            // when editing a new interval
+            if (ChecksWerePassed)
+            {
+                _context.Add(TempIntervalsAndTasksPerProject);
+                _context.SaveChanges();
+                LoadAllIntervalsAndTasksPerProjects();
+                return;
+            }
+
+            //bool ChecksWerePassed = PerformChecksOnUserInput02();
+
+            //// if checks were passed, transfer properties of CB0201 to the temp interval
+            //if (ChecksWerePassed)
+            //{
+            //    TempInterval.TaskId = SelectedTask.Id;
+            //}
+
+            //// when editing an existing interval
+            //if (ChecksWerePassed && SelectedInterval != null)
+            //{
+            //    SelectedInterval = TransferIntervalProperties(SelectedInterval, TempInterval);
+            //    _context.Update(SelectedInterval);
+            //    _context.SaveChanges();
+            //    LoadAllIntervals();
+            //    return;
+            //}
+
+            //// when editing a new interval
+            //if (ChecksWerePassed)
+            //{
+            //    _context.Add(TempInterval);
+            //    _context.SaveChanges();
+            //    LoadAllIntervals();
+            //    return;
+            //}
+        }
+
+        private void DELEButton01Clicked(object sender, RoutedEventArgs e)
+        {
+            if (SelectedIntervalsAndTasksPerProject == null)
+            {
+                MessageBox.Show("Please select an interval.");
+                return;
+            }
+
+            MessageBoxResult answer01 = MessageBoxResult.No;
+
+            answer01 = MessageBox.Show(
+                "Are you sure you want to delete the selected interval?",
+                "Confirm interval deletion.",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (answer01 == MessageBoxResult.Yes)
+            {
+                // proceed with interval deletion
+                _context.Remove(SelectedIntervalsAndTasksPerProject);
+                _context.SaveChanges();
+                LoadAllIntervalsAndTasksPerProjects();
+            }
+
+            ResetButtons01();
+        }
+
+        private IntervalsAndTasksPerProject TransferIntervalsAndTasksPerProjectProperties(IntervalsAndTasksPerProject toFill, IntervalsAndTasksPerProject origin)
+        {
+            toFill.ProjectId = origin.ProjectId;
+            toFill.ActualStartTime = origin.ActualStartTime;
+            toFill.ActualEndTime = origin.ActualEndTime;
+            toFill.TaskName = origin.TaskName;
+            toFill.TaskDescription = origin.TaskDescription;
+
+            return toFill;
         }
 
         #endregion
