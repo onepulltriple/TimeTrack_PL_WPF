@@ -130,6 +130,39 @@ namespace TIMETRACK_PL
             }
         }
 
+        private List<IntervalsAndTasksPerProject> _listOfIntervalsAndTasksPerProjects;
+        public List<IntervalsAndTasksPerProject> ListOfIntervalsAndTasksPerProjects
+        {
+            get { return _listOfIntervalsAndTasksPerProjects; }
+            set
+            {
+                _listOfIntervalsAndTasksPerProjects = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ListOfIntervalsAndTasksPerProjects)));
+            }
+        }
+
+        private IntervalsAndTasksPerProject _selectedIntervalsAndTasksPerProject;
+        public IntervalsAndTasksPerProject SelectedIntervalsAndTasksPerProject
+        {
+            get { return _selectedIntervalsAndTasksPerProject; }
+            set
+            {
+                _selectedIntervalsAndTasksPerProject = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedIntervalsAndTasksPerProject)));
+            }
+        }
+
+        private IntervalsAndTasksPerProject _tempIntervalsAndTasksPerProject;
+        public IntervalsAndTasksPerProject TempIntervalsAndTasksPerProject
+        {
+            get { return _tempIntervalsAndTasksPerProject; }
+            set
+            {
+                _tempIntervalsAndTasksPerProject = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TempIntervalsAndTasksPerProject)));
+            }
+        }
+
         #endregion
 
         public ManageTasksWindow(Project HandedOverProject)
@@ -140,6 +173,7 @@ namespace TIMETRACK_PL
             SelectedProject = HandedOverProject;
 
             LoadAllProjectTasks();
+            LoadAllIntervalsAndTasksPerProjects(HandedOverProject);
             //LoadAllIntervals();
         }
 
@@ -170,6 +204,7 @@ namespace TIMETRACK_PL
             CloseUserInputFields02();
         }
 
+        #region Old stuff
         private void CloseUserInputFields01()
         {
             UI0101.IsEnabled = false;
@@ -723,5 +758,23 @@ namespace TIMETRACK_PL
 
             return toFill;
         }
+
+        #endregion
+
+        #region New Stuff
+
+        private void LoadAllIntervalsAndTasksPerProjects(Project HandedOverProject)
+        {
+            ListOfIntervalsAndTasksPerProjects = new(_context.IntervalsAndTasksPerProjects
+                .Where(intervalsandtasksperproject => intervalsandtasksperproject.ProjectId == HandedOverProject.Id)
+                .OrderBy(intervalsandtasksperproject => intervalsandtasksperproject.ActualStartTime)
+                .ToArray()
+                );
+            //ResetButtons02();
+
+            //CloseUserInputFields02();
+        }
+
+        #endregion
     }
 }

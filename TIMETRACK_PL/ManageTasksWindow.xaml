@@ -49,8 +49,8 @@
                 Grid.ColumnSpan="2"
                 IsReadOnly="True"
                 Name="DG01"
-                ItemsSource="{Binding ListOfProjectTasks}"
-                SelectedItem="{Binding SelectedTask}"
+                ItemsSource="{Binding ListOfIntervalsAndTasksPerProjects}"
+                SelectedItem="{Binding SelectedIntervalsAndTasksPerProject}"
                 SelectionChanged="DG01SelectionChanged"
                 />
     
