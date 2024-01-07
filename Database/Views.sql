@@ -1,0 +1,17 @@
+USE TIMETRACK_PL
+GO
+
+CREATE VIEW INTERVALS_AND_TASKS_PER_PROJECT AS
+SELECT 
+	 PROJECTS.id AS 'Project ID'
+	,INTERVALS.StartTimeActual AS 'Actual Start Time'
+	,INTERVALS.EndTimeActual AS 'Actual End Time'
+	,TASKS.Name AS 'Task Name'
+	,TASKS.Description AS 'Task Description'
+
+FROM INTERVALS 
+	INNER JOIN TASKS
+		ON INTERVALS.Task_id = TASKS.id
+	INNER JOIN PROJECTS
+		ON TASKS.Project_id = PROJECTS.id
+

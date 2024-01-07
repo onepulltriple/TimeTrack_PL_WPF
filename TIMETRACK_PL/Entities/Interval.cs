@@ -17,5 +17,5 @@ public partial class Interval
 
     public int TaskId { get; set; }
 
-    public virtual Task Task { get; set; } = null!;
+    public virtual Task Task { get; set; }
 }

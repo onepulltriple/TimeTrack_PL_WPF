@@ -19,6 +19,8 @@ public partial class TimetrackPlContext : DbContext
 
     public virtual DbSet<Interval> Intervals { get; set; }
 
+    public virtual DbSet<IntervalsAndTasksPerProject> IntervalsAndTasksPerProjects { get; set; }
+
     public virtual DbSet<Project> Projects { get; set; }
 
     public virtual DbSet<Task> Tasks { get; set; }
@@ -60,6 +62,30 @@ public partial class TimetrackPlContext : DbContext
                 .HasConstraintName("FK_ParentTaskChildInterval");
         });
 
+        modelBuilder.Entity<IntervalsAndTasksPerProject>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("INTERVALS_AND_TASKS_PER_PROJECT");
+
+            entity.Property(e => e.ActualEndTime)
+                .HasColumnType("datetime")
+                .HasColumnName("Actual End Time");
+            entity.Property(e => e.ActualStartTime)
+                .HasColumnType("datetime")
+                .HasColumnName("Actual Start Time");
+            entity.Property(e => e.ProjectId).HasColumnName("Project ID");
+            entity.Property(e => e.TaskDescription)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("Task Description");
+            entity.Property(e => e.TaskName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("Task Name");
+        });
+
         modelBuilder.Entity<Project>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__PROJECTS__3213E83F5F28F94D");
@@ -76,6 +102,7 @@ public partial class TimetrackPlContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Number)
+                .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false);
         });
@@ -91,6 +118,7 @@ public partial class TimetrackPlContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.Name)
+                .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.ProjectId).HasColumnName("Project_id");
