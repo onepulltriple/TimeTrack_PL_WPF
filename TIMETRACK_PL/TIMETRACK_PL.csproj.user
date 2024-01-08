@@ -10,6 +10,9 @@
     <Compile Update="ManageProjectsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ManageIntervalsPerProjectWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ManageTasksWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -19,6 +22,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ManageProjectsWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ManageIntervalsPerProjectWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ManageTasksWindow.xaml">

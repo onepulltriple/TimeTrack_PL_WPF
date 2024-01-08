@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="ManageTasksWindow" Height="450" Width="800"
         Background="AliceBlue">
-    
-    <Grid Name="GRID00" Grid.Row="0" Grid.Column="0">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
@@ -23,35 +22,33 @@
 
         <!--headline-->
         <Label        Grid.Row="0" Grid.Column="0" FontSize="20" Margin="6" VerticalAlignment="Center">
-            Manage Intervals
+            Manage Tasks
         </Label>
         <Label        Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="6" HorizontalAlignment="Center" VerticalAlignment="Center">
-            Select an interval to manage or click "Create Interval".
+            Select a task to manage or click "Create Task".
         </Label>
 
-        <Button      Grid.Row="0" Grid.Column="3" Name="BACKButton01" Click="BackButton01Clicked" Content="Back"/>
-        <Button      Grid.Row="0" Grid.Column="3" Name="CANCButton01" Click="CancelButton01Clicked" Content="Cancel"/>
+        <Button      Grid.Row="0" Grid.Column="3" Name="BACKButton" Click="BackButtonClicked" Content="Back"/>
+        <Button      Grid.Row="0" Grid.Column="3" Name="CANCButton" Click="CancelButtonClicked" Content="Cancel"/>
 
 
         <!--middle section-->
         <DataGrid 
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                IsReadOnly="True"
-                Name="DG01"
-                ItemsSource="{Binding ListOfIntervalsAndTasksPerProjects}"
-                SelectedItem="{Binding SelectedIntervalsAndTasksPerProject}"
-                SelectionChanged="DG01SelectionChanged"
-                />
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            IsReadOnly="True"
+            Name="DG01"
+            ItemsSource="{Binding ListOfTasks}"
+            SelectedItem="{Binding SelectedTask}"
+            SelectionChanged="DG01SelectionChanged"
+            />
 
         <Grid 
-                Grid.Row="1"
-                Grid.Column="2"
-                Grid.ColumnSpan="2">
+            Grid.Row="1"
+            Grid.Column="2"
+            Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -62,28 +59,22 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <Label        Grid.Row="0" Grid.Column="0" Name="UI01" Margin="6" VerticalAlignment="Center" Content="Interval Start Time"/>
-            <TextBox      Grid.Row="0" Grid.Column="1" Name="UI02" Margin="6" VerticalAlignment="Center" Text="{Binding EnteredStartTime}"/>
-            <Label        Grid.Row="1" Grid.Column="0" Name="UI03" Margin="6" VerticalAlignment="Center" Content="Interval End Time"/>
-            <TextBox      Grid.Row="1" Grid.Column="1" Name="UI04" Margin="6" VerticalAlignment="Center" Text="{Binding EnteredEndTime}"/>
-            <Label        Grid.Row="2" Grid.Column="0" Name="UI05" Margin="6" VerticalAlignment="Center" Content="Interval Date"/>
-            <DatePicker   Grid.Row="2" Grid.Column="1" Name="DP01" Margin="6" VerticalAlignment="Center" />
-            <Label        Grid.Row="3" Grid.Column="0" Name="UI07" Margin="6" VerticalAlignment="Center" Content="Assign to existing task:"/>
-            <ComboBox     Grid.Row="3" Grid.Column="1" Name="CB01" Margin="6" VerticalAlignment="Center" 
-                              ItemsSource="{Binding ListOfProjectTasks}" SelectedItem="{Binding SelectedTask}"
-                              DisplayMemberPath="Name" SelectionChanged="CB01SelectionChanged" IsSynchronizedWithCurrentItem="True"/>
-            <Label        Grid.Row="4" Grid.Column="0" Name="UI09" Margin="6" VerticalAlignment="Center" Content="Task Name"/>
-            <TextBox      Grid.Row="4" Grid.Column="1" Name="UI10" Margin="6" VerticalAlignment="Center" Text="{Binding TempIntervalsAndTasksPerProject.TaskName}"/>
-            <Label        Grid.Row="5" Grid.Column="0" Name="UI11" Margin="6" VerticalAlignment="Center" Content="Task Description"/>
-            <TextBox      Grid.Row="5" Grid.Column="1" Name="UI12" Margin="6" VerticalAlignment="Center" Text="{Binding TempIntervalsAndTasksPerProject.TaskDescription}"/>
+            <Label        Grid.Row="0" Grid.Column="0" Name="UI01" Margin="6" VerticalAlignment="Center" Content="Assigned to Project:"/>
+            <ComboBox     Grid.Row="0" Grid.Column="1" Name="CB01" Margin="6" VerticalAlignment="Center" 
+                          ItemsSource="{Binding ListOfProjects}" SelectedItem="{Binding SelectedProject}"
+                          DisplayMemberPath="Name" /> <!--SelectionChanged="CB01SelectionChanged"-->
+            <Label        Grid.Row="1" Grid.Column="0" Name="UI03" Margin="6" VerticalAlignment="Center" Content="Name"/>
+            <TextBox      Grid.Row="1" Grid.Column="1" Name="UI04" Margin="6" VerticalAlignment="Center" Text="{Binding TempTask.Name}"/>
+            <Label        Grid.Row="2" Grid.Column="0" Name="UI05" Margin="6" VerticalAlignment="Center" Content="Description"/>
+            <TextBox      Grid.Row="2" Grid.Column="1" Name="UI06" Margin="6" VerticalAlignment="Center" Text="{Binding TempTask.Description}"/>
 
         </Grid>
 
         <!--lower section-->
-        <Button      Grid.Row="2" Grid.Column="0" Name="CREAButton01" Click="CREAButton01Clicked" Content="Create Interval"/>
-        <Button      Grid.Row="2" Grid.Column="1" Name="EDITButton01" Click="EDITButton01Clicked" Content="Edit Interval"/>
-        <Button      Grid.Row="2" Grid.Column="2" Name="SAVEButton01" Click="SAVEButton01Clicked" Content="Save Changes"/>
-        <Button      Grid.Row="2" Grid.Column="3" Name="DELEButton01" Click="DELEButton01Clicked" Content="Delete Interval"/>
+        <Button      Grid.Row="2" Grid.Column="0" Name="CREAButton" Click="CREAButtonClicked" Content="Create Task"/>
+        <Button      Grid.Row="2" Grid.Column="1" Name="EDITButton" Click="EDITButtonClicked" Content="Edit Task"/>
+        <Button      Grid.Row="2" Grid.Column="2" Name="SAVEButton" Click="SAVEButtonClicked" Content="Save Changes"/>
+        <Button      Grid.Row="2" Grid.Column="3" Name="DELEButton" Click="DELEButtonClicked" Content="Delete Task"/>
 
     </Grid>
 </Window>

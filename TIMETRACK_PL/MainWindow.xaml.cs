@@ -111,7 +111,7 @@ namespace TIMETRACK_PL
         private void ProjectButtonClicked(object sender, RoutedEventArgs e, Project project)
         {
             // open up a new CRUD window and hand over the project
-            ManageTasksWindow MTW = new(project);
+            ManageIntervalsPerProjectWindow MTW = new(project);
             MTW.Show();
             this.Close();
         }
@@ -152,10 +152,16 @@ namespace TIMETRACK_PL
             this.Close();
         }
 
+        private void MTASButtonClicked(object sender, RoutedEventArgs e)
+        {
+            ManageTasksWindow MTW = new();
+            MTW.Show();
+            this.Close();
+        }
+
         private void EXITButtonClicked(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
-
     }
 }

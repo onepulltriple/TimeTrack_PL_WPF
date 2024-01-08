@@ -32,8 +32,8 @@
 
         <!--lower section-->
         <Button      Grid.Row="2" Grid.Column="0" Name="MEVEButton" Click="MPRJButtonClicked" Content="Manage Projects"/>
-        <!--<Button      Grid.Row="3" Grid.Column="0" Name="MARTButton" Click="MARTButtonClicked" Content="Manage Artists"/>
-        <Button      Grid.Row="2" Grid.Column="1" Name="MPERButton" Click="MPERButtonClicked" Content="Manage Performances"/>
+        <Button      Grid.Row="3" Grid.Column="0" Name="MTASButton" Click="MTASButtonClicked" Content="Manage Tasks"/>
+        <!--<Button      Grid.Row="2" Grid.Column="1" Name="MPERButton" Click="MPERButtonClicked" Content="Manage Performances"/>
         <Button      Grid.Row="3" Grid.Column="1" Name="MAPPButton" Click="MAPPButtonClicked" Content="Manage Appearances"/>
         <Button      Grid.Row="2" Grid.Column="2" Name="MTKHButton" Click="MTKHButtonClicked" Content="Manage Ticketholders"/>
         <Button      Grid.Row="3" Grid.Column="2" Name="MTIXButton" Click="MTIXButtonClicked" Content="Manage Tickets"/>
