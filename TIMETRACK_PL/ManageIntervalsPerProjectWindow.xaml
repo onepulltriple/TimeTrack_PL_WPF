@@ -29,8 +29,8 @@
             Select an interval to manage or click "Create Interval".
         </Label>
 
-        <Button      Grid.Row="0" Grid.Column="3" Name="BACKButton01" Click="BackButton01Clicked" Content="Back"/>
-        <Button      Grid.Row="0" Grid.Column="3" Name="CANCButton01" Click="CancelButton01Clicked" Content="Cancel"/>
+        <Button      Grid.Row="0" Grid.Column="3" Name="BACKButton01" Click="BackButtonClicked" Content="Back"/>
+        <Button      Grid.Row="0" Grid.Column="3" Name="CANCButton01" Click="CancelButtonClicked" Content="Cancel"/>
 
 
         <!--middle section-->
@@ -71,19 +71,19 @@
             <Label        Grid.Row="3" Grid.Column="0" Name="UI07" Margin="6" VerticalAlignment="Center" Content="Assign to existing task:"/>
             <ComboBox     Grid.Row="3" Grid.Column="1" Name="CB01" Margin="6" VerticalAlignment="Center" 
                               ItemsSource="{Binding ListOfProjectTasks}" SelectedItem="{Binding SelectedTask}"
-                              DisplayMemberPath="Name" SelectionChanged="CB01SelectionChanged" IsSynchronizedWithCurrentItem="True"/>
-            <Label        Grid.Row="4" Grid.Column="0" Name="UI09" Margin="6" VerticalAlignment="Center" Content="Task Name"/>
+                              DisplayMemberPath="Name" SelectionChanged="CB01SelectionChanged" />
+            <!--<Label        Grid.Row="4" Grid.Column="0" Name="UI09" Margin="6" VerticalAlignment="Center" Content="Task Name"/>
             <TextBox      Grid.Row="4" Grid.Column="1" Name="UI10" Margin="6" VerticalAlignment="Center" Text="{Binding TempIntervalsAndTasksPerProject.TaskName}"/>
             <Label        Grid.Row="5" Grid.Column="0" Name="UI11" Margin="6" VerticalAlignment="Center" Content="Task Description"/>
-            <TextBox      Grid.Row="5" Grid.Column="1" Name="UI12" Margin="6" VerticalAlignment="Center" Text="{Binding TempIntervalsAndTasksPerProject.TaskDescription}"/>
+            <TextBox      Grid.Row="5" Grid.Column="1" Name="UI12" Margin="6" VerticalAlignment="Center" Text="{Binding TempIntervalsAndTasksPerProject.TaskDescription}"/>-->
 
         </Grid>
 
         <!--lower section-->
-        <Button      Grid.Row="2" Grid.Column="0" Name="CREAButton01" Click="CREAButton01Clicked" Content="Create Interval"/>
-        <Button      Grid.Row="2" Grid.Column="1" Name="EDITButton01" Click="EDITButton01Clicked" Content="Edit Interval"/>
-        <Button      Grid.Row="2" Grid.Column="2" Name="SAVEButton01" Click="SAVEButton01Clicked" Content="Save Changes"/>
-        <Button      Grid.Row="2" Grid.Column="3" Name="DELEButton01" Click="DELEButton01Clicked" Content="Delete Interval"/>
+        <Button      Grid.Row="2" Grid.Column="0" Name="CREAButton01" Click="CREAButtonClicked" Content="Create Interval"/>
+        <Button      Grid.Row="2" Grid.Column="1" Name="EDITButton01" Click="EDITButtonClicked" Content="Edit Interval"/>
+        <Button      Grid.Row="2" Grid.Column="2" Name="SAVEButton01" Click="SAVEButtonClicked" Content="Save Changes"/>
+        <Button      Grid.Row="2" Grid.Column="3" Name="DELEButton01" Click="DELEButtonClicked" Content="Delete Interval"/>
 
     </Grid>
 </Window>

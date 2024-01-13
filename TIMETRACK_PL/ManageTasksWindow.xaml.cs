@@ -255,14 +255,16 @@ namespace TIMETRACK_PL
         {
             bool ChecksWerePassed = PerformChecksOnUserInput();
 
-            // if checks were passed, transfer properties of CB01 to the temp task
-            if (ChecksWerePassed)
+            if (!ChecksWerePassed)
             {
-                TempTask.ProjectId = SelectedProject.Id;
+                return;
             }
 
-            // when editing an existing event
-            if (ChecksWerePassed && SelectedTask != null)
+            // if checks were passed, transfer properties of CB01 to the temp task
+            TempTask.ProjectId = SelectedProject.Id;
+
+            // when editing an existing task
+            if (SelectedTask != null)
             {
                 SelectedTask = TransferProperties(SelectedTask, TempTask);
                 _context.Update(SelectedTask);
@@ -271,14 +273,11 @@ namespace TIMETRACK_PL
                 return;
             }
 
-            // when editing a new event
-            if (ChecksWerePassed)
-            {
-                _context.Add(TempTask);
-                _context.SaveChanges();
-                LoadAllTasks();
-                return;
-            }
+            // when editing a new task
+            _context.Add(TempTask);
+            _context.SaveChanges();
+            LoadAllTasks();
+            return;
         }
 
         private void DELEButtonClicked(object sender, RoutedEventArgs e)

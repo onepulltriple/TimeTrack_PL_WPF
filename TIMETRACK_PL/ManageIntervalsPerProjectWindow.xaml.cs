@@ -188,7 +188,7 @@ namespace TIMETRACK_PL
         }
 
         #region Old stuff
-        private void CloseUserInputFields01()
+        private void CloseUserInputFields()
         {
             UI01.IsEnabled = false;
             UI02.IsEnabled = false;
@@ -198,13 +198,13 @@ namespace TIMETRACK_PL
             DP01.IsEnabled = false;
             UI07.IsEnabled = false;
             CB01.IsEnabled = false;
-            UI09.IsEnabled = false;
-            UI10.IsEnabled = false;
-            UI11.IsEnabled = false;
-            UI12.IsEnabled = false;
+            //UI09.IsEnabled = false;
+            //UI10.IsEnabled = false;
+            //UI11.IsEnabled = false;
+            //UI12.IsEnabled = false;
         }
 
-        private void OpenUserInputFields01()
+        private void OpenUserInputFields()
         {
             UI01.IsEnabled = true;
             UI02.IsEnabled = true;
@@ -214,13 +214,13 @@ namespace TIMETRACK_PL
             DP01.IsEnabled = true;
             UI07.IsEnabled = true;
             CB01.IsEnabled = true;
-            UI09.IsEnabled = true;
-            UI10.IsEnabled = true;
-            UI11.IsEnabled = true;
-            UI12.IsEnabled = true;
+            //UI09.IsEnabled = true;
+            //UI10.IsEnabled = true;
+            //UI11.IsEnabled = true;
+            //UI12.IsEnabled = true;
         }
 
-        private void ResetButtons01()
+        private void ResetButtons()
         {
             DG01.UnselectAll();
             DG01.IsEnabled = true;
@@ -234,27 +234,27 @@ namespace TIMETRACK_PL
             DELEButton01.IsEnabled = false;
         }
 
-        private void CancelButton01Clicked(object sender, RoutedEventArgs e)
+        private void CancelButtonClicked(object sender, RoutedEventArgs e)
         {
             if (SAVEButton01.IsEnabled ||
                 EDITButton01.IsEnabled && DELEButton01.IsEnabled)
             {
-                ResetButtons01();
-                CloseUserInputFields01();
+                ResetButtons();
+                CloseUserInputFields();
                 return;
             }
 
             CRUDWindowWPF.ReturnToMainWindowAndClose(this);
         }
 
-        private void BackButton01Clicked(object sender, RoutedEventArgs e)
+        private void BackButtonClicked(object sender, RoutedEventArgs e)
         {
             CRUDWindowWPF.ReturnToMainWindowAndClose(this);
         }
 
         private void DG01SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ButtonsInManageMode01();
+            ButtonsInManageMode();
         }
 
         private void CB01SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -275,7 +275,7 @@ namespace TIMETRACK_PL
             //}
         }
 
-        private void ButtonsInManageMode01()
+        private void ButtonsInManageMode()
         {
             BACKButton01.Visibility = Visibility.Hidden;
             CANCButton01.Visibility = Visibility.Visible;
@@ -286,7 +286,7 @@ namespace TIMETRACK_PL
             DELEButton01.IsEnabled = true;
         }
 
-        private void ButtonsInEditMode01()
+        private void ButtonsInEditMode()
         {
             BACKButton01.Visibility = Visibility.Hidden;
             CANCButton01.Visibility = Visibility.Visible;
@@ -299,7 +299,7 @@ namespace TIMETRACK_PL
             DG01.IsEnabled = false;
         }
 
-        private bool PerformChecksOnUserInput01()
+        private bool PerformChecksOnUserInput()
         {
             // block if a required field is empty
             //if (TempTask.Name == null)
@@ -315,12 +315,10 @@ namespace TIMETRACK_PL
                 return false;
             }
 
-            // if all checks have been passed
-            return true;
-        }
 
-        private bool PerformChecksOnUserInput02()
-        {
+
+
+
             // block if a required field is empty
             if (CB01.SelectedItem == null ||
                 DP01.SelectedDate == null ||
@@ -443,30 +441,6 @@ namespace TIMETRACK_PL
             return true;
         }
 
-        private Entities.Task TransferTaskProperties(Entities.Task toFill, Entities.Task origin)
-        {
-            toFill.Id = origin.Id;
-            toFill.Name = origin.Name;
-            toFill.Description = origin.Description;
-            toFill.ProjectId = origin.ProjectId;
-
-            return toFill;
-        }
-
-        private Interval TransferIntervalProperties(Interval toFill, Interval origin)
-        {
-            toFill.Id = origin.Id;
-            toFill.StartTimeActual = origin.StartTimeActual;
-            toFill.EndTimeActual = origin.EndTimeActual;
-            toFill.StartTimeRounded = origin.StartTimeRounded;
-            toFill.EndTimeRounded = origin.EndTimeRounded;
-            toFill.TaskId = origin.TaskId;
-
-            toFill.Task = origin.Task;
-
-            return toFill;
-        }
-
         #endregion
 
         #region New Stuff
@@ -479,18 +453,19 @@ namespace TIMETRACK_PL
                 .ToArray()
                 );
 
-            ResetButtons01();
+            ResetButtons();
 
-            CloseUserInputFields01();
+            CloseUserInputFields();
         }
 
-        private void CREAButton01Clicked(object sender, RoutedEventArgs e)
+        private void CREAButtonClicked(object sender, RoutedEventArgs e)
         {
-            ButtonsInEditMode01();
+            ButtonsInEditMode();
 
-            OpenUserInputFields01();
+            OpenUserInputFields();
 
-            // create new interval
+            // create a new task and a new interval
+            //TempTask = new();
             TempInterval = new();
 
             // clear user inputs fields which are not bound to the temp interval
@@ -498,15 +473,14 @@ namespace TIMETRACK_PL
             EnteredEndTime = null;
             DP01.SelectedDate = DateTime.Now;
 
-            // create new task or repopulate the combo box?
 
             //CB01.SelectedItem = ListOfProjectTasks.Select(task => task).Where(interval)
-            TempIntervalsAndTasksPerProject = new();
-            TempIntervalsAndTasksPerProject.ProjectId = SelectedProject.Id;
+            //TempIntervalsAndTasksPerProject = new();
+            //TempIntervalsAndTasksPerProject.ProjectId = SelectedProject.Id;
 
         }
 
-        private void EDITButton01Clicked(object sender, RoutedEventArgs e)
+        private void EDITButtonClicked(object sender, RoutedEventArgs e)
         {
             if (SelectedIntervalsAndTasksPerProject == null)
             {
@@ -514,57 +488,64 @@ namespace TIMETRACK_PL
                 return;
             }
 
-            ButtonsInEditMode01();
+            ButtonsInEditMode();
 
-            OpenUserInputFields01();
+            OpenUserInputFields();
 
-            TempIntervalsAndTasksPerProject = TransferIntervalsAndTasksPerProjectProperties(new IntervalsAndTasksPerProject(), SelectedIntervalsAndTasksPerProject);
+            // create two temp objects based on the components of the composite object
+            //TempTask = TransferPropertiesFromCompositeToTask(new Entities.Task(), SelectedIntervalsAndTasksPerProject);
+            TempInterval = TransferPropertiesFromCompositeToInterval(new Interval(), SelectedIntervalsAndTasksPerProject);
+            SelectedTask = ListOfProjectTasks.FirstOrDefault(task => task.Id == SelectedIntervalsAndTasksPerProject.TaskId);
+            SelectedInterval = SelectedTask.Intervals.FirstOrDefault(interval => interval.Id == SelectedIntervalsAndTasksPerProject.IntervalId);
 
-            // fill out user inputs fields which are not bound to the temp interval
-            //DP01.SelectedDate = TempInterval.StartTimeActual;
-            //EnteredStartTime = TempInterval.StartTimeActual.ToString("HH:mm");
-            //if (SelectedInterval.EndTimeActual != null)
-            //{
-            //    EnteredEndTime = TempInterval.EndTimeActual?.ToString("HH:mm");
-            //}
-            //CB01.SelectedItem = TempInterval.Task;
+            // fill out user inputs fields which are not bound to the temp compnents objects
+            EnteredStartTime = TempInterval.StartTimeActual.ToString("HH:mm");
+            DP01.SelectedDate = TempInterval.StartTimeActual;
+            if (TempInterval.EndTimeActual != null)
+            {
+                EnteredEndTime = TempInterval.EndTimeActual?.ToString("HH:mm");
+            }
+            CB01.SelectedItem = SelectedTask;
         }
 
-        private void SAVEButton01Clicked(object sender, RoutedEventArgs e)
+        private void SAVEButtonClicked(object sender, RoutedEventArgs e)
         {
-            bool ChecksWerePassed = PerformChecksOnUserInput01();
+            bool ChecksWerePassed = PerformChecksOnUserInput();
 
-            // when editing an existing interval
-            if (ChecksWerePassed && SelectedTask != null)
+            if (!ChecksWerePassed)
+            {
+                return;
+            }
+
+            // if checks were passed, transfer properties of CB01 to the temp interval
+            TempInterval.TaskId = SelectedTask.Id;
+
+            //when editing an existing interval
+            if (SelectedIntervalsAndTasksPerProject != null)
             {
                 //SelectedIntervalsAndTasksPerProject.ProjectId = SelectedProject.Id;
+                //SelectedIntervalsAndTasksPerProject = TransferIntervalsAndTasksPerProjectProperties(SelectedIntervalsAndTasksPerProject, TempIntervalsAndTasksPerProject);
 
+                //SelectedTask = TransferTaskProperties(SelectedTask, TempTask);
+                SelectedInterval = TransferIntervalProperties(SelectedInterval, TempInterval);
 
-                SelectedIntervalsAndTasksPerProject = TransferIntervalsAndTasksPerProjectProperties(SelectedIntervalsAndTasksPerProject, TempIntervalsAndTasksPerProject);
-                _context.Update(SelectedTask);
+                //_context.Update(SelectedTask);
+                _context.Update(SelectedInterval);
                 _context.SaveChanges();
                 LoadAllIntervalsAndTasksPerProjects();
                 return;
             }
 
             // when editing a new interval
-            if (ChecksWerePassed)
-            {
-                _context.Add(TempIntervalsAndTasksPerProject);
-                _context.SaveChanges();
-                LoadAllIntervalsAndTasksPerProjects();
-                return;
-            }
+            _context.Add(TempInterval);
+            _context.SaveChanges();
+            LoadAllIntervalsAndTasksPerProjects();
+            return;
 
 
 
             //bool ChecksWerePassed = PerformChecksOnUserInput02();
 
-            //// if checks were passed, transfer properties of CB0201 to the temp interval
-            //if (ChecksWerePassed)
-            //{
-            //    TempInterval.TaskId = SelectedTask.Id;
-            //}
 
             //// when editing an existing interval
             //if (ChecksWerePassed && SelectedInterval != null)
@@ -586,13 +567,16 @@ namespace TIMETRACK_PL
             //}
         }
 
-        private void DELEButton01Clicked(object sender, RoutedEventArgs e)
+        private void DELEButtonClicked(object sender, RoutedEventArgs e)
         {
             if (SelectedIntervalsAndTasksPerProject == null)
             {
                 MessageBox.Show("Please select an interval.");
                 return;
             }
+
+            SelectedTask = ListOfProjectTasks.FirstOrDefault(task => task.Id == SelectedIntervalsAndTasksPerProject.TaskId);
+            SelectedInterval = SelectedTask.Intervals.FirstOrDefault(interval => interval.Id == SelectedIntervalsAndTasksPerProject.IntervalId);
 
             MessageBoxResult answer01 = MessageBoxResult.No;
 
@@ -604,24 +588,51 @@ namespace TIMETRACK_PL
             if (answer01 == MessageBoxResult.Yes)
             {
                 // proceed with interval deletion
-                _context.Remove(SelectedIntervalsAndTasksPerProject);
+                _context.Remove(SelectedInterval);
                 _context.SaveChanges();
                 LoadAllIntervalsAndTasksPerProjects();
             }
 
-            ResetButtons01();
+            ResetButtons();
         }
 
-        private IntervalsAndTasksPerProject TransferIntervalsAndTasksPerProjectProperties(IntervalsAndTasksPerProject toFill, IntervalsAndTasksPerProject origin)
+        private Entities.Task TransferPropertiesFromCompositeToTask(Entities.Task taskToFill, IntervalsAndTasksPerProject origin)
         {
-            //toFill.ProjectId = origin.ProjectId;
-            toFill.ProjectId = SelectedProject.Id;
-            toFill.ActualStartTime = origin.ActualStartTime;
-            toFill.ActualEndTime = origin.ActualEndTime;
-            toFill.TaskName = SelectedTask.Name;
-            toFill.TaskDescription = SelectedTask.Description;
-            //toFill.TaskName = origin.TaskName;
-            //toFill.TaskDescription = origin.TaskDescription;
+            taskToFill.Id = origin.TaskId;
+            taskToFill.Name = origin.TaskName;
+            taskToFill.Description = origin.TaskDescription;
+
+            return taskToFill;
+        }
+
+        private Interval TransferPropertiesFromCompositeToInterval(Interval IntervalToFill, IntervalsAndTasksPerProject origin)
+        {
+            IntervalToFill.Id = origin.IntervalId;
+            IntervalToFill.StartTimeActual = origin.ActualStartTime;
+            IntervalToFill.EndTimeActual = origin.ActualEndTime;
+
+            return IntervalToFill;
+        }
+        private Entities.Task TransferTaskProperties(Entities.Task toFill, Entities.Task origin)
+        {
+            toFill.Id = origin.Id;
+            toFill.Name = origin.Name;
+            toFill.Description = origin.Description;
+            toFill.ProjectId = origin.ProjectId;
+
+            return toFill;
+        }
+
+        private Interval TransferIntervalProperties(Interval toFill, Interval origin)
+        {
+            toFill.Id = origin.Id;
+            toFill.StartTimeActual = origin.StartTimeActual;
+            toFill.EndTimeActual = origin.EndTimeActual;
+            toFill.StartTimeRounded = origin.StartTimeRounded;
+            toFill.EndTimeRounded = origin.EndTimeRounded;
+            toFill.TaskId = origin.TaskId;
+
+            toFill.Task = origin.Task;
 
             return toFill;
         }
