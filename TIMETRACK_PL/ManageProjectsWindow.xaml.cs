@@ -110,23 +110,6 @@ namespace TIMETRACK_PL
             CloseUserInputFields();
         }
 
-        private void LoadAllTasks()
-        {
-            ListOfTasks = new(_context.Tasks
-                .OrderBy(task => task.Name)
-                .Include(task => task.Intervals)
-                .ToArray()
-                );
-        }
-
-        private void LoadAllIntervals()
-        {
-            ListOfIntervals = new(_context.Intervals
-                .ToArray()
-                );
-        }
-
-
         private void CloseUserInputFields()
         {
             UI01.IsEnabled = false;
@@ -297,10 +280,13 @@ namespace TIMETRACK_PL
                     int countOfTasks = TasksAssignedToProject.Count();
 
                     string messageToUser =
-                        $"The selected project has\n" +
-                        $"{countOfTasks} tasks assigned to it.\n" +
-                        $"Deleting this project will delete all of its assigned tasks.\n" +
-                        $"Are you sure you want to delete the selected project?";
+                        $"The selected project has {countOfTasks} tasks assigned to it.\n" +
+                        $"Those tasks may have intervals booked.\n" +
+                        $"Deleting this project will delete all of its assigned tasks\n" +
+                        $"as well as any intervals booked to those tasks.\n" +
+                        $"Are you sure you want to delete the selected project?\n\n" +
+                        $"Consider archiving the project instead, which will keep its database entries.\n" +
+                        $"Archived projects will not appear outside of the 'Manage Projects' window.";
 
                     // ask follow up question
                     answer02 = MessageBox.Show(messageToUser,

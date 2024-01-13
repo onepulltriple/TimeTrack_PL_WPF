@@ -119,14 +119,10 @@ namespace TIMETRACK_PL
         private void LoadAllProjects()
         {
             ListOfProjects = new(_context.Projects
+                .Where(project => project.IsArchived != true)
                 .OrderBy(project => project.Number)
-                .Include(project => project.Tasks)
                 .ToArray()
                 );
-
-            //ResetButtons();
-
-            //CloseUserInputFields();
         }
 
         private void LoadAllTasks()

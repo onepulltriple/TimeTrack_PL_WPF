@@ -136,6 +136,7 @@ namespace TIMETRACK_PL
         private void LoadAllProjects()
         {
             ListOfProjects = new(_context.Projects
+                .Where(project => project.IsArchived != true)
                 .OrderBy(project => project.Name)
                 .ToArray()
                 );
@@ -198,22 +199,6 @@ namespace TIMETRACK_PL
             ButtonsInManageMode();
         }
 
-        //private void CB01SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    // when the selected item is switched to null, do nothing further
-        //    if (CB01.SelectedItem == null)
-        //        return;
-
-        //    // open remaining user input fields, since an event has been selected
-        //    OpenUserInputFields();
-
-        //    // fill in user input fields based on the selected event
-        //    //DP01.SelectedDate = SelectedProject.StartTime;
-        //    //EnteredStartTime = SelectedProject.StartTime.ToString("HH:mm");
-        //    //DP02.SelectedDate = SelectedProject.EndTime;
-        //    //EnteredEndTime = SelectedProject.EndTime.ToString("HH:mm");
-        //}
-
         private void ButtonsInManageMode()
         {
             BACKButton.Visibility = Visibility.Hidden;
@@ -242,14 +227,10 @@ namespace TIMETRACK_PL
         {
             ButtonsInEditMode();
 
-            // open combo box only to select a project first
+            OpenUserInputFields();
             CB01.SelectedItem = null;
-            CB01.IsEnabled = true;
 
             TempTask = new();
-
-            // clear user inputs fields which are not bound to the temp Task
-
         }
 
         private void EDITButtonClicked(object sender, RoutedEventArgs e)
@@ -262,14 +243,12 @@ namespace TIMETRACK_PL
 
             ButtonsInEditMode();
 
-            CB01.IsEnabled = true;
             OpenUserInputFields();
 
             TempTask = TransferProperties(new Entities.Task(), SelectedTask);
 
             // fill out user inputs fields which are not bound to the temp task
-            //CB01.SelectedItem = TempTask.Project;
-            SelectedProject = TempTask.Project;
+            CB01.SelectedItem = TempTask.Project;
         }
 
         private void SAVEButtonClicked(object sender, RoutedEventArgs e)
@@ -331,8 +310,7 @@ namespace TIMETRACK_PL
                     int countOfIntervals = IntervalsBookedForTask.Count();
 
                     string messageToUser =
-                        $"The selected task has\n" +
-                        $"{countOfIntervals} intervals booked.\n" +
+                        $"The selected task has {countOfIntervals} intervals booked.\n" +
                         $"Deleting this task will delete all of its booked intervals.\n" +
                         $"Are you sure you want to delete the selected task?";
 
@@ -367,7 +345,7 @@ namespace TIMETRACK_PL
                 TempTask.Description == null ||
                 CB01.SelectedItem == null)
             {
-                MessageBox.Show("Please fill out a name and a description.");
+                MessageBox.Show("Please assign the task to project and fill out a name and a description.");
                 return false;
             }
 
@@ -381,6 +359,8 @@ namespace TIMETRACK_PL
             toFill.Name = origin.Name;
             toFill.Description = origin.Description;
             toFill.ProjectId = origin.ProjectId;
+
+            toFill.Project = origin.Project;
 
             return toFill;
         }
