@@ -65,7 +65,7 @@
                           DisplayMemberPath="Name" /> 
             <Label        Grid.Row="1" Grid.Column="0" Name="UI03" Margin="6" VerticalAlignment="Center" Content="Name"/>
             <TextBox      Grid.Row="1" Grid.Column="1" Name="UI04" Margin="6" VerticalAlignment="Center" Text="{Binding TempTask.Name}"/>
-            <Label        Grid.Row="2" Grid.Column="0" Name="UI05" Margin="6" VerticalAlignment="Center" Content="Description"/>
+            <Label        Grid.Row="2" Grid.Column="0" Name="UI05" Margin="6" VerticalAlignment="Center" Content="Description/Comment"/>
             <TextBox      Grid.Row="2" Grid.Column="1" Name="UI06" Margin="6" VerticalAlignment="Center" Text="{Binding TempTask.Description}"/>
 
         </Grid>

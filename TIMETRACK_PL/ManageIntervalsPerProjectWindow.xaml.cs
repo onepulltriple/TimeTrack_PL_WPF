@@ -175,7 +175,6 @@ namespace TIMETRACK_PL
 
             LoadAllIntervalsAndTasksPerProjects();
             LoadAllProjectTasks();
-            //LoadAllIntervals();
         }
 
         private void LoadAllProjectTasks()
@@ -186,17 +185,6 @@ namespace TIMETRACK_PL
                 .Include(task => task.Intervals)
                 .ToArray()
                 );
-        }
-
-        private void LoadAllIntervals()
-        {
-            ListOfIntervals = new(_context.Intervals
-                .OrderBy(interval => interval.StartTimeActual)
-                .ToArray()
-                );
-            //ResetButtons02();
-
-            //CloseUserInputFields02();
         }
 
         #region Old stuff
@@ -314,9 +302,16 @@ namespace TIMETRACK_PL
         private bool PerformChecksOnUserInput01()
         {
             // block if a required field is empty
-            if (TempTask.Name == null)
+            //if (TempTask.Name == null)
+            //{
+            //    MessageBox.Show("Please give the task a name.");
+            //    return false;
+            //}
+
+            // block if no task has been selected
+            if (SelectedTask == null)
             {
-                MessageBox.Show("Please give the task a name.");
+                MessageBox.Show("Please select a task.");
                 return false;
             }
 
@@ -467,6 +462,8 @@ namespace TIMETRACK_PL
             toFill.EndTimeRounded = origin.EndTimeRounded;
             toFill.TaskId = origin.TaskId;
 
+            toFill.Task = origin.Task;
+
             return toFill;
         }
 
@@ -497,19 +494,15 @@ namespace TIMETRACK_PL
             TempInterval = new();
 
             // clear user inputs fields which are not bound to the temp interval
-            EnteredStartTime = null;
+            EnteredStartTime = DateTime.Now.ToString("HH:mm");
             EnteredEndTime = null;
             DP01.SelectedDate = DateTime.Now;
 
             // create new task or repopulate the combo box?
 
+            //CB01.SelectedItem = ListOfProjectTasks.Select(task => task).Where(interval)
             TempIntervalsAndTasksPerProject = new();
             TempIntervalsAndTasksPerProject.ProjectId = SelectedProject.Id;
-
-            //// open combo box 
-            //CB01.SelectedItem = null;
-            //UI01.IsEnabled = true;
-            //CB01.IsEnabled = true;
 
         }
 
@@ -524,8 +517,6 @@ namespace TIMETRACK_PL
             ButtonsInEditMode01();
 
             OpenUserInputFields01();
-            //UI01.IsEnabled = true;
-            //CB01.IsEnabled = true;
 
             TempIntervalsAndTasksPerProject = TransferIntervalsAndTasksPerProjectProperties(new IntervalsAndTasksPerProject(), SelectedIntervalsAndTasksPerProject);
 
@@ -546,6 +537,9 @@ namespace TIMETRACK_PL
             // when editing an existing interval
             if (ChecksWerePassed && SelectedTask != null)
             {
+                //SelectedIntervalsAndTasksPerProject.ProjectId = SelectedProject.Id;
+
+
                 SelectedIntervalsAndTasksPerProject = TransferIntervalsAndTasksPerProjectProperties(SelectedIntervalsAndTasksPerProject, TempIntervalsAndTasksPerProject);
                 _context.Update(SelectedTask);
                 _context.SaveChanges();
@@ -561,6 +555,8 @@ namespace TIMETRACK_PL
                 LoadAllIntervalsAndTasksPerProjects();
                 return;
             }
+
+
 
             //bool ChecksWerePassed = PerformChecksOnUserInput02();
 
@@ -618,11 +614,14 @@ namespace TIMETRACK_PL
 
         private IntervalsAndTasksPerProject TransferIntervalsAndTasksPerProjectProperties(IntervalsAndTasksPerProject toFill, IntervalsAndTasksPerProject origin)
         {
-            toFill.ProjectId = origin.ProjectId;
+            //toFill.ProjectId = origin.ProjectId;
+            toFill.ProjectId = SelectedProject.Id;
             toFill.ActualStartTime = origin.ActualStartTime;
             toFill.ActualEndTime = origin.ActualEndTime;
-            toFill.TaskName = origin.TaskName;
-            toFill.TaskDescription = origin.TaskDescription;
+            toFill.TaskName = SelectedTask.Name;
+            toFill.TaskDescription = SelectedTask.Description;
+            //toFill.TaskName = origin.TaskName;
+            //toFill.TaskDescription = origin.TaskDescription;
 
             return toFill;
         }
