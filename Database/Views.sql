@@ -4,8 +4,10 @@ GO
 CREATE VIEW INTERVALS_AND_TASKS_PER_PROJECT AS
 SELECT 
 	 PROJECTS.id AS 'Project ID'
+	,INTERVALS.id AS 'Interval ID'
 	,INTERVALS.StartTimeActual AS 'Actual Start Time'
 	,INTERVALS.EndTimeActual AS 'Actual End Time'
+	,TASKS.id AS 'Task ID'
 	,TASKS.Name AS 'Task Name'
 	,TASKS.Description AS 'Task Description'
 

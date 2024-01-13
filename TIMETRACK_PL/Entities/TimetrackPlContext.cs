@@ -74,11 +74,13 @@ public partial class TimetrackPlContext : DbContext
             entity.Property(e => e.ActualStartTime)
                 .HasColumnType("datetime")
                 .HasColumnName("Actual Start Time");
+            entity.Property(e => e.IntervalId).HasColumnName("Interval ID");
             entity.Property(e => e.ProjectId).HasColumnName("Project ID");
             entity.Property(e => e.TaskDescription)
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("Task Description");
+            entity.Property(e => e.TaskId).HasColumnName("Task ID");
             entity.Property(e => e.TaskName)
                 .IsRequired()
                 .HasMaxLength(50)
