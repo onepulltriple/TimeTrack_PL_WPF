@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TIMETRACK_PL"
         mc:Ignorable="d"
-        Title="ManageTasksWindow" Height="450" Width="800"
-        Background="AliceBlue">
+        Title="ManageTasksWindow" Height="600" Width="1200"
+        Background="AliceBlue"
+        Left="100" Top="100">
     
     <Grid Name="GRID00" Grid.Row="0" Grid.Column="0">
         <Grid.RowDefinitions>
@@ -32,23 +33,30 @@
         <Button      Grid.Row="0" Grid.Column="3" Name="BACKButton01" Click="BackButtonClicked" Content="Back"/>
         <Button      Grid.Row="0" Grid.Column="3" Name="CANCButton01" Click="CancelButtonClicked" Content="Cancel"/>
 
-
         <!--middle section-->
         <DataGrid 
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                IsReadOnly="True"
-                Name="DG01"
-                ItemsSource="{Binding ListOfIntervalsAndTasksPerProjects}"
-                SelectedItem="{Binding SelectedIntervalsAndTasksPerProject}"
-                SelectionChanged="DG01SelectionChanged"
-                />
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            IsReadOnly="True"
+            Name="DG01"
+            ItemsSource="{Binding ListOfIntervalsAndTasksPerProjects}"
+            SelectedItem="{Binding SelectedIntervalsAndTasksPerProject}"
+            SelectionChanged="DG01SelectionChanged"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn MinWidth="70" Header="Start time" Binding="{Binding ActualStartTime, StringFormat=HH:mm}"/>
+                <DataGridTextColumn MinWidth="70" Header="End time" Binding="{Binding ActualEndTime, StringFormat=HH:mm}"/>
+                <DataGridTextColumn MinWidth="150" Header="Task name" Binding="{Binding TaskName}"/>
+                <DataGridTextColumn MinWidth="294" Header="Description/Comment" Binding="{Binding TaskDescription}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
 
         <Grid 
-                Grid.Row="1"
-                Grid.Column="2"
-                Grid.ColumnSpan="2">
+            Grid.Row="1"
+            Grid.Column="2"
+            Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>

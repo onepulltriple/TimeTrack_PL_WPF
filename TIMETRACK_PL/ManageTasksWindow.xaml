@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TIMETRACK_PL"
         mc:Ignorable="d"
-        Title="ManageTasksWindow" Height="450" Width="800"
-        Background="AliceBlue">
+        Title="ManageTasksWindow" Height="600" Width="1200"
+        Background="AliceBlue"
+        Left="100" Top="100">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -31,7 +33,6 @@
         <Button      Grid.Row="0" Grid.Column="3" Name="BACKButton" Click="BackButtonClicked" Content="Back"/>
         <Button      Grid.Row="0" Grid.Column="3" Name="CANCButton" Click="CancelButtonClicked" Content="Cancel"/>
 
-
         <!--middle section-->
         <DataGrid 
             Grid.Row="1"
@@ -42,7 +43,13 @@
             ItemsSource="{Binding ListOfTasks}"
             SelectedItem="{Binding SelectedTask}"
             SelectionChanged="DG01SelectionChanged"
-            />
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn MinWidth="150" Header="Project" Binding="{Binding Project.Name}"/>
+                <DataGridTextColumn MinWidth="150" Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn MinWidth="284" Header="Description/Comment" Binding="{Binding Description}"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
         <Grid 
             Grid.Row="1"

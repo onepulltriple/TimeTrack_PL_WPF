@@ -227,11 +227,17 @@ namespace TIMETRACK_PL
         {
             bool ChecksWerePassed = PerformChecksOnUserInput();
 
-            // when editing an existing project
-            if (ChecksWerePassed && SelectedProject != null)
+            if (!ChecksWerePassed)
             {
-                TempProject.IsArchived = CB01.IsChecked.Value;
+                return;
+            }
 
+            // if checks were passed, transfer properties of CB01 to the temp project
+            TempProject.IsArchived = CB01.IsChecked.Value;
+
+            // when editing an existing project
+            if (SelectedProject != null)
+            {
                 SelectedProject = TransferProperties(SelectedProject, TempProject);
                 _context.Update(SelectedProject);
                 _context.SaveChanges();
@@ -240,15 +246,10 @@ namespace TIMETRACK_PL
             }
 
             // when editing a new project
-            if (ChecksWerePassed)
-            {
-                TempProject.IsArchived = CB01.IsChecked.Value;
-
-                _context.Add(TempProject);
-                _context.SaveChanges();
-                LoadAllProjects();
-                return;
-            }
+            _context.Add(TempProject);
+            _context.SaveChanges();
+            LoadAllProjects();
+            return;
         }
 
         private void DELEButtonClicked(object sender, RoutedEventArgs e)

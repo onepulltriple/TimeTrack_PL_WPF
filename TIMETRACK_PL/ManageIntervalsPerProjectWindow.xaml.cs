@@ -187,7 +187,6 @@ namespace TIMETRACK_PL
                 );
         }
 
-        #region Old stuff
         private void CloseUserInputFields()
         {
             UI01.IsEnabled = false;
@@ -316,9 +315,6 @@ namespace TIMETRACK_PL
             }
 
 
-
-
-
             // block if a required field is empty
             if (CB01.SelectedItem == null ||
                 DP01.SelectedDate == null ||
@@ -423,14 +419,14 @@ namespace TIMETRACK_PL
                 }
 
                 // check that StartTimeActual and EndTimeActual do not occur before and after an existing interval, respectively 
-                Interval EventOverlappedConflict = _context.Intervals
+                Interval IntervalOverlappedConflict = _context.Intervals
                     .FirstOrDefault(Interval =>
                     TempInterval.StartTimeActual <= Interval.StartTimeActual &&
                     TempInterval.EndTimeActual >= Interval.EndTimeActual &&
                     TempInterval.Id != Interval.Id
                     );
 
-                if (EventOverlappedConflict != null)
+                if (IntervalOverlappedConflict != null)
                 {
                     MessageBox.Show("The entered times encompass an existing interval. Please adjust the start and/or end times.");
                     return false;
@@ -440,10 +436,6 @@ namespace TIMETRACK_PL
             // if all checks have been passed
             return true;
         }
-
-        #endregion
-
-        #region New Stuff
 
         private void LoadAllIntervalsAndTasksPerProjects()
         {
@@ -527,9 +519,9 @@ namespace TIMETRACK_PL
                 //SelectedIntervalsAndTasksPerProject = TransferIntervalsAndTasksPerProjectProperties(SelectedIntervalsAndTasksPerProject, TempIntervalsAndTasksPerProject);
 
                 //SelectedTask = TransferTaskProperties(SelectedTask, TempTask);
-                SelectedInterval = TransferIntervalProperties(SelectedInterval, TempInterval);
-
                 //_context.Update(SelectedTask);
+
+                SelectedInterval = TransferIntervalProperties(SelectedInterval, TempInterval);
                 _context.Update(SelectedInterval);
                 _context.SaveChanges();
                 LoadAllIntervalsAndTasksPerProjects();
@@ -541,30 +533,6 @@ namespace TIMETRACK_PL
             _context.SaveChanges();
             LoadAllIntervalsAndTasksPerProjects();
             return;
-
-
-
-            //bool ChecksWerePassed = PerformChecksOnUserInput02();
-
-
-            //// when editing an existing interval
-            //if (ChecksWerePassed && SelectedInterval != null)
-            //{
-            //    SelectedInterval = TransferIntervalProperties(SelectedInterval, TempInterval);
-            //    _context.Update(SelectedInterval);
-            //    _context.SaveChanges();
-            //    LoadAllIntervals();
-            //    return;
-            //}
-
-            //// when editing a new interval
-            //if (ChecksWerePassed)
-            //{
-            //    _context.Add(TempInterval);
-            //    _context.SaveChanges();
-            //    LoadAllIntervals();
-            //    return;
-            //}
         }
 
         private void DELEButtonClicked(object sender, RoutedEventArgs e)
@@ -594,6 +562,9 @@ namespace TIMETRACK_PL
             }
 
             ResetButtons();
+
+            // clear CB01 
+            CB01.SelectedItem = null;
         }
 
         private Entities.Task TransferPropertiesFromCompositeToTask(Entities.Task taskToFill, IntervalsAndTasksPerProject origin)
@@ -632,11 +603,7 @@ namespace TIMETRACK_PL
             toFill.EndTimeRounded = origin.EndTimeRounded;
             toFill.TaskId = origin.TaskId;
 
-            toFill.Task = origin.Task;
-
             return toFill;
         }
-
-        #endregion
     }
 }

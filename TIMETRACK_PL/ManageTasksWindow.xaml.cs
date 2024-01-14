@@ -123,7 +123,7 @@ namespace TIMETRACK_PL
         private void LoadAllTasks()
         {
             ListOfTasks = new(_context.Tasks
-                .OrderBy(task => task.Name)
+                .OrderBy(task => task.Project.Name)
                 .Include(task => task.Intervals)
                 .ToArray()
                 );

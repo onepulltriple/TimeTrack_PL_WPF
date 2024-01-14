@@ -58,28 +58,6 @@ namespace TIMETRACK_PL
             }
         }
 
-        private List<Entities.Task> _listOfTasks;
-        public List<Entities.Task> ListOfTasks
-        {
-            get { return _listOfTasks; }
-            set
-            {
-                _listOfTasks = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ListOfTasks)));
-            }
-        }
-
-        private List<Interval> _listOfIntervals;
-        public List<Interval> ListOfIntervals
-        {
-            get { return _listOfIntervals; }
-            set
-            {
-                _listOfIntervals = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ListOfIntervals)));
-            }
-        }
-
         #endregion
 
         public MainWindow()
@@ -100,8 +78,8 @@ namespace TIMETRACK_PL
                 Button newButton = new();
                 newButton.Content = ListOfProjects[i].Name;
                 newButton.Name = "ProjectButton" + i.ToString("D" + 2);
-                newButton.Height = 80;
-                newButton.Width = 100;
+                newButton.Height = 60;
+                newButton.Width = 150;
                 newButton.Click += (object sender, RoutedEventArgs e) => 
                     { ProjectButtonClicked(sender, e, tempProject); };
                 WP01.Children.Add(newButton);
@@ -121,22 +99,6 @@ namespace TIMETRACK_PL
             ListOfProjects = new(_context.Projects
                 .Where(project => project.IsArchived != true)
                 .OrderBy(project => project.Number)
-                .ToArray()
-                );
-        }
-
-        private void LoadAllTasks()
-        {
-            ListOfTasks = new(_context.Tasks
-                .OrderBy(task => task.Name)
-                .Include(task => task.Intervals)
-                .ToArray()
-                );
-        }
-
-        private void LoadAllIntervals()
-        {
-            ListOfIntervals = new(_context.Intervals
                 .ToArray()
                 );
         }
