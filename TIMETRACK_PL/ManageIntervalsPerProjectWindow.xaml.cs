@@ -356,7 +356,7 @@ namespace TIMETRACK_PL
             Interval StartTimeConflict = _context.Intervals
                 .FirstOrDefault(Interval =>
                 TempInterval.StartTimeActual >= Interval.StartTimeActual &&
-                TempInterval.StartTimeActual <= Interval.EndTimeActual &&
+                TempInterval.StartTimeActual < Interval.EndTimeActual &&
                 TempInterval.Id != Interval.Id
                 );
 
@@ -407,7 +407,7 @@ namespace TIMETRACK_PL
                 // check that EndTimeActual does not occur during an existing interval
                 Interval EndTimeConflict = _context.Intervals
                     .FirstOrDefault(Interval =>
-                    TempInterval.EndTimeActual >= Interval.StartTimeActual &&
+                    TempInterval.EndTimeActual > Interval.StartTimeActual &&
                     TempInterval.EndTimeActual <= Interval.EndTimeActual &&
                     TempInterval.Id != Interval.Id
                     );
