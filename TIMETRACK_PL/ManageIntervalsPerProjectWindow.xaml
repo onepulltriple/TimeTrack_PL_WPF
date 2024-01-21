@@ -47,8 +47,9 @@
             <DataGrid.Columns>
                 <DataGridTextColumn MinWidth="70" Header="Start time" Binding="{Binding ActualStartTime, StringFormat=HH:mm}"/>
                 <DataGridTextColumn MinWidth="70" Header="End time" Binding="{Binding ActualEndTime, StringFormat=HH:mm}"/>
+                <DataGridTextColumn MinWidth="70" Header="Date" Binding="{Binding ActualStartTime, StringFormat=dddd dd.MM.}"/>
                 <DataGridTextColumn MinWidth="150" Header="Task name" Binding="{Binding TaskName}"/>
-                <DataGridTextColumn MinWidth="294" Header="Description/Comment" Binding="{Binding TaskDescription}"/>
+                <DataGridTextColumn MinWidth="224" Header="Description/Comment" Binding="{Binding TaskDescription}"/>
             </DataGrid.Columns>
 
         </DataGrid>
